@@ -5,6 +5,7 @@ import { Camera, Permissions } from 'expo';
 import styles from './styles';
 
 import Toolbar from './toolbar.component';
+import Gallery from './gallery.component';
 
 export default class CameraPage extends React.Component {
     camera = null;
@@ -46,7 +47,13 @@ export default class CameraPage extends React.Component {
 
     render() {
 
-        const { hasCameraPermission, flashMode, cameraType, capturing } = this.state;
+        const { 
+            hasCameraPermission, 
+            flashMode, 
+            cameraType, 
+            capturing, 
+            captures 
+        } = this.state;
         
         if (hasCameraPermission === null) {
             return <View />;
@@ -62,6 +69,7 @@ export default class CameraPage extends React.Component {
                     ref={camera => this.camera = camera}
                 />
             </View>
+                {captures.length > 0 && <Gallery captures={captures}/>}
                 <Toolbar 
                     capturing={capturing}
                     flashMode={flashMode}
