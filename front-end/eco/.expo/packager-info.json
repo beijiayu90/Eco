@@ -1,9 +1,9 @@
 {
   "devToolsPort": 19002,
   "expoServerPort": 19000,
-  "packagerPort": 19003,
-  "packagerPid": 9572,
+  "packagerPort": 19001,
+  "packagerPid": 11450,
   "expoServerNgrokUrl": "https://aa-kf3.anonymous.eco.exp.direct",
   "packagerNgrokUrl": "https://packager.aa-kf3.anonymous.eco.exp.direct",
-  "ngrokPid": 9593
+  "ngrokPid": 11468
 }
