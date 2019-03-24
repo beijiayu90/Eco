@@ -2,6 +2,8 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { Camera, Permissions } from 'expo';
 
+import axios from 'axios';
+
 import styles from './styles';
 
 import Toolbar from './toolbar.component';
@@ -28,8 +30,51 @@ export default class CameraPage extends React.Component {
     };
 
     handleShortCapture = async () => {
+
         const photoData = await this.camera.takePictureAsync();
-        this.setState({ capturing: false, captures: [photoData, ...this.state.captures] })
+
+        this.setState({ capturing: false, captures: [photoData, ...this.state.captures] });
+
+        const imgUri = photoData.uri;
+
+        const data = {
+            uri: imgUri.slice(7),
+            type: 'image/jpeg', // or photo.type
+            name: 'testPhotoName.jpg'
+        };
+
+        const config = {
+            headers: {
+                'Accept': 'application/json',
+                "Content-Type": "multipart/form-data"
+            }
+        };
+
+        try {
+
+            // const response = await axios.get("http://10.192.233.254:5000");
+
+            const response = await axios.post('http://10.192.233.254:5000/predict', { body: data }, config);
+
+            alert(JSON.stringify(response));
+        } catch (err) {
+
+            alert(JSON.stringify(err));
+        }
+
+        
+
+
+
+
+
+       
+
+       
+
+        // alert(JSON.stringify(response));
+
+        
     };
 
     handleLongCapture = async () => {
