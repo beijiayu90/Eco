@@ -1,0 +1,3 @@
+paths:
+  create_custom_model: { path: "/v3/classifiers", method: "POST"}
+  

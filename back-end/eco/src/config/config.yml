@@ -1,2 +1,5 @@
 server:
   port: 5000
+
+mongodb:
+  port: 27017
