@@ -37,13 +37,11 @@ export default class CameraPage extends React.Component {
 
         const imgUri = photoData.uri.slice(7);
 
-        const data = new FormData();
-
-        data.append('photo', {
+        const data = {
             uri: imgUri,
             type: 'image/jpeg', // or photo.type
             name: 'testPhotoName.jpg'
-        });
+        }
 
         const config = {
             method: "POST",
@@ -57,23 +55,8 @@ export default class CameraPage extends React.Component {
         const response = await axios.post('http://10.192.233.254:5000/predict', config);
 
         alert(JSON.stringify(response));
-
-        fetch("http://10.192.233.254:5000/predict", config).then(response => {
-            console.log(response);
-        }).catch(err => alert(JSON.stringify(response)));
+    
        
-
-        
-
-
-
-
-
-       
-
-       
-
-        // alert(JSON.stringify(response));
 
         
     };
