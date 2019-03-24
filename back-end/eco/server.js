@@ -19,20 +19,18 @@ app.get('/', (req, res) => res.send("hello_world"));
 
 app.post('/predict', async (req, res) => {
 
-    console.log(req.body);
+    console.log("Hello World", req.body.body);
 
-    // const { url } = req.body;
+    const config = {
+        headers: {
+            'Prediction-Key': 'a033f1bc912a4c4b8e30a13154ad27d0',
+            "Content-Type": "application/json"
+        }
+    };
 
-    // const config = {
-    //     headers: {
-    //         'Prediction-Key': 'a033f1bc912a4c4b8e30a13154ad27d0',
-    //         "Content-Type": "application/json"
-    //     }
-    // };
+    const response = await axios.post('https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/3be62c68-3d16-455d-8db8-45d8e9c53586/url?iterationId=1687db70-9e07-40f3-8470-fc0eb2d4a38d', { url }, config);
 
-    // const response = await axios.post('https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Prediction/3be62c68-3d16-455d-8db8-45d8e9c53586/url?iterationId=1687db70-9e07-40f3-8470-fc0eb2d4a38d', { url }, config);
-
-    // res.send(JSON.stringify(response));
+    res.send(JSON.stringify(response));
 });
 
 app.listen(PORT, () => console.log(`Listening on port ${PORT}!`));

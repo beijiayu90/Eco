@@ -35,32 +35,33 @@ export default class CameraPage extends React.Component {
 
         this.setState({ capturing: false, captures: [photoData, ...this.state.captures] });
 
-        const imgUri = photoData.uri;
+        const imgUri = photoData.uri.slice(7);
 
-        const data = {
-            uri: imgUri.slice(7),
+        const data = new FormData();
+
+        data.append('photo', {
+            uri: imgUri,
             type: 'image/jpeg', // or photo.type
             name: 'testPhotoName.jpg'
-        };
+        });
 
         const config = {
+            method: "POST",
             headers: {
-                'Accept': 'application/json',
-                "Content-Type": "multipart/form-data"
-            }
+                'Content-Type': 'multipart/form-data',
+            },
+            body: JSON.stringify(data)
         };
 
-        try {
 
-            // const response = await axios.get("http://10.192.233.254:5000");
+        const response = await axios.post('http://10.192.233.254:5000/predict', config);
 
-            const response = await axios.post('http://10.192.233.254:5000/predict', { body: data }, config);
+        alert(JSON.stringify(response));
 
-            alert(JSON.stringify(response));
-        } catch (err) {
-
-            alert(JSON.stringify(err));
-        }
+        fetch("http://10.192.233.254:5000/predict", config).then(response => {
+            console.log(response);
+        }).catch(err => alert(JSON.stringify(response)));
+       
 
         
 
